@@ -1,0 +1,66 @@
+<div class="main-container">
+  <div class="header-row">
+    <div class="filters">
+      @for (item of filterItems; track item) {
+      <button 
+        [class.active]="activeFilter === item" 
+        (click)="filterByStatus(item)">
+        {{ item }}
+      </button>
+      }
+    </div>
+    <div class="search-box">
+      <div class="search-wrapper">
+        <span class="search-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </span>
+        <input
+          id="hostel-user-search"
+          name="userSearch"
+          type="search"
+          [(ngModel)]="searchText"
+          (input)="onSearchChange()"
+          placeholder="Search users..."
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="cards-container">
+    @if(filteredUsers.length) {
+        <div class="cards">
+        @for (user of filteredUsers; track user.id) {
+        <div class="user-card">
+            <div class="card-header">
+            @if (activeFilter === 'All') {
+            <div class="status-container">
+                <span class="status-text">{{ user?.status }}</span>
+                <span class="status-dot" [ngClass]="user?.status?.toLowerCase()"></span>
+            </div>
+            }
+            </div>
+
+            <div class="avatar">
+            <img src="usericon.png" alt="User" />
+            </div>
+
+            <h4>{{ user?.name ?? '-' }}</h4>
+            <p>{{ user?.phone ?? '-' }}</p>
+            <p>{{ user?.email ?? '-' }}</p>
+            <p class="company">{{ user?.company?.name ?? '-' }}</p>
+            <button class="view-profile-btn" (click)="openProfile(user)">View Profile</button>
+        </div>
+        }
+        </div>
+    } @else {
+        <div class="no-results">
+        <h3>No Users Found</h3>
+        <p>We couldn't find any results matching "{{ searchText }}"</p>
+        </div>
+    }
+  </div>
+</div>
+
+@if(selectedUser) {
+  <app-user-detail-modal [user]="selectedUser" (close)="closeProfile()"></app-user-detail-modal>
+}

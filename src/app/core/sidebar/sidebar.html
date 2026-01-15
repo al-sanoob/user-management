@@ -1,0 +1,17 @@
+
+<div class="logo-section">
+  <img src="logo.png" alt="YOCOSTAYS" class="sidebar-logo">
+</div>
+
+<aside class="sidebar">
+  <nav class="sidebar-nav">
+    @for (item of navItems; track item?.path) {
+      <a [routerLink]="item?.path" 
+         routerLinkActive="active" 
+         class="nav-item">
+        <img [src]="item.icon" [alt]="item.label" class="nav-icon"> 
+        {{ item.label }}
+      </a>
+    }
+  </nav>
+</aside>
