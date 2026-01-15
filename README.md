@@ -5,6 +5,8 @@ The app fetches users from an external API and displays them in a responsive car
 
 ---
 
+![Desktop](./Screenshot 2026-01-15 085017.png)
+
 ## Features
 
 - Fetch users from API on page load
@@ -46,5 +48,5 @@ npm install
 ng serve
 
 
-![Desktop](./Screenshot 2026-01-15 085017.png)
+
 
